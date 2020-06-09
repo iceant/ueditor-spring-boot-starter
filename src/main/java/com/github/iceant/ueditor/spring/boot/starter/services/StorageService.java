@@ -162,6 +162,18 @@ public class StorageService {
         return fileInfo;
     }
 
+
+    public String getRelativePath(String fullpath){
+        if(fullpath==null || fullpath.length()<1) return fullpath;
+        fullpath = fullpath.replace("\\", "/");
+        String rootPath = properties.getFileVault();
+        int pos = fullpath.indexOf(rootPath);
+        if(pos!=-1){
+            return fullpath.substring(pos+rootPath.length());
+        }
+        return fullpath;
+    }
+
     public List<FileInfo> listImage(int start, int size) {
         String rootPath = properties.getFileVault();
         String filePath = properties.getImageManagerListPath();
@@ -174,18 +186,7 @@ public class StorageService {
                 return properties.getImageManagerAllowFiles().contains(suffix);
             }
         }, result);
-        return result;
-    }
-
-    public String getRelativePath(String fullpath){
-        if(fullpath==null || fullpath.length()<1) return fullpath;
-        fullpath = fullpath.replace("\\", "/");
-        String rootPath = properties.getFileVault();
-        int pos = fullpath.indexOf(rootPath);
-        if(pos!=-1){
-            return fullpath.substring(pos+rootPath.length());
-        }
-        return fullpath;
+        return result.subList(start, start+size);
     }
 
     public List<FileInfo> listFile(int start, int size) {
@@ -200,6 +201,6 @@ public class StorageService {
                 return properties.getFileManagerAllowFiles().contains(suffix);
             }
         }, result);
-        return result;
+        return result.subList(start, start+size);
     }
 }
