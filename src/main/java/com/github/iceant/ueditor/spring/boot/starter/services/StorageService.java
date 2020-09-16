@@ -186,7 +186,11 @@ public class StorageService {
                 return properties.getImageManagerAllowFiles().contains(suffix);
             }
         }, result);
-        return result.subList(start, start+size);
+        int toIndex = start+size;
+        if(toIndex>=result.size()){
+            toIndex = result.size();
+        }
+        return result.subList(start, toIndex);
     }
 
     public List<FileInfo> listFile(int start, int size) {
@@ -201,6 +205,10 @@ public class StorageService {
                 return properties.getFileManagerAllowFiles().contains(suffix);
             }
         }, result);
-        return result.subList(start, start+size);
+        int toIndex = start+size;
+        if(toIndex>=result.size()){
+            toIndex = result.size();
+        }
+        return result.subList(start, toIndex);
     }
 }
