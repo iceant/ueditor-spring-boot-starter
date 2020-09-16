@@ -182,6 +182,7 @@ public class StorageService {
         FileUtil.listFiles(fileDir.getAbsolutePath(), new FileFilter() {
             @Override
             public boolean accept(File pathname) {
+                if(pathname.isDirectory()) return false;
                 String suffix = FileUtil.getSuffix(pathname.getName());
                 return properties.getImageManagerAllowFiles().contains(suffix);
             }
@@ -201,6 +202,7 @@ public class StorageService {
         FileUtil.listFiles(fileDir.getAbsolutePath(), new FileFilter() {
             @Override
             public boolean accept(File pathname) {
+                if(pathname.isDirectory()) return false;
                 String suffix = FileUtil.getSuffix(pathname.getName());
                 return properties.getFileManagerAllowFiles().contains(suffix);
             }
