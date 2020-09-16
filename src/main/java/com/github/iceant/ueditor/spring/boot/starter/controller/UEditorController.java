@@ -37,7 +37,6 @@ public class UEditorController {
 
     @RequestMapping(path = {"", "/**"})
     public void staticResource(HttpServletRequest request, HttpServletResponse response){
-        DebugUtil.printRequest(request);
         String contextPath = request.getContextPath();
         String requestUri = request.getRequestURI();
         String relativePath = StringUtils.removePrefix(requestUri, contextPath);
@@ -174,8 +173,6 @@ public class UEditorController {
 
     @RequestMapping(path = {"/controller"})
     public Object controller(HttpServletRequest request) {
-        DebugUtil.printRequest(request);
-
         String action = request.getParameter("action");
         if(action==null||action.length()<1){
             action = "config";
