@@ -38,11 +38,15 @@ public class FileUtil {
                 return pathname.isDirectory();
             }
         });
-        for(File file : files){
-            result.add(getFileInfo(file));
+        if(files!=null) {
+            for (File file : files) {
+                result.add(getFileInfo(file));
+            }
         }
-        for(File path : paths){
-            listFiles(path.getAbsolutePath(), fileFilter, result);
+        if(paths!=null) {
+            for (File path : paths) {
+                listFiles(path.getAbsolutePath(), fileFilter, result);
+            }
         }
     }
 
